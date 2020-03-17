@@ -1,9 +1,4 @@
-# sdkjhfskdghdsfkghfiujsfdgd
-# sdjgksgfdhgkfjhsgkjgsa
-# kdsjhdskghsdkgjffs
-
-# sdkjhfskdghdsfkghfiujsfdgddfggsgfgsdg
-# ?
+# last version of bttle ships, end of day two tuesday
 import random
 import os
 
