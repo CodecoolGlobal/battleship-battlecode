@@ -1,9 +1,7 @@
-# sdkjhfskdghdsfkghfiujsfdgd
-# sdjgksgfdhgkfjhsgkjgsa
-# kdsjhdskghsdkgjffs
 
-# sdkjhfskdghdsfkghfiujsfdgddfggsgfgsdg
-# ?
+# okok
+
+
 import random
 import os
 
