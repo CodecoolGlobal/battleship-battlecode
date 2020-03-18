@@ -1,197 +1,98 @@
+def init_ships():       #greg
+        ship1 = 1
+        ship2 = 2
+        return ship1, ship2
 
-# okok
-
-
-import random
-import os
-
-import time
+#return two ships 1 unit 2unit
 
 
-board = []
+def init_board():       #piotrek
+        pass
+#init board 5x5 with boardlabel
 
-for x in range(0,10):
-  board.append(["."] * 10)
 
-# def print_board(board):
-#   for row in board:
-#     print (" ".join(row))
+def print_menu():       #greg
+        print('Placement phase: Player 1 turn. 1 part ship. Enter coordinates')
+
+# initial menu
+
+def round_menu():       #piotrek
+        pass
+#round menu with player info
 
 def print_board(board):
-#     top = " ".join([chr(i) for i in range(ord('A'), ord('K'), +1)])# drukujemy alfabet w zakesie o skoku
-    print("  0 1 2 3 4 5 6 7 8 9")
-    cyfra = 0
-    for row in board:
-        print(cyfra, " ".join(row))
-        cyfra += 1
+        print(board)
 
-print("Let's play Battleship!")
+#print board
+def user_input():
+        pass
+#return coordinates [][]
 
-player_1 = input("Enter name: ")
-players = [player_1]
-os.system('cls||clear')
+def user_input_check(coordinates):
+        coordinates_list = list(coordinates)
+    if len(coordinates_list) != 2:
+        return False
+    possible_coordinates = ['a','b','c','d','e','A','B','C','D','E','1','2','3','4','5','6']
+    if coordinates_list[0] not in possible_coordinates or coordinates_list[1] not in possible_coordinates:
+        print("Invalid Input try agian")
+        return False
+    return True
 
+def translate_letters_to_numbers(coordinates):
+    coordinates_list = list(coordinates)
+    try:
+        if coordinates_list[0] == 'A' or coordinates_list[0] == 'a':
+            coordinates_list[0] = 0
+        if coordinates_list[0] == 'B' or coordinates_list[0] == 'b':
+            coordinates_list[0] = 1
+        if coordinates_list[0] == 'C' or coordinates_list[0] == 'c':
+            coordinates_list[0] = 2
+        if coordinates_list[0] == 'D' or coordinates_list[0] == 'd':
+            coordinates_list[0] = 3
+        if coordinates_list[0] == 'E' or coordinates_list[0] == 'e':
+            coordinates_list[0] = 4
+        if coordinates_list[0] == 'F' or coordinates_list[0] == 'f':
+            coordinates_list[0] = 5
+        # coordinates_list[0] = int(coordinates_list[0]) + 1
+        coordinates_list[1] = int(coordinates_list[1]) -1
+        coordinates_list.reverse() 
+    except:
+        print('ERROR: Invalid input')
+    return coordinates_list    
 
-def random_pc_ship_row(board):
-    return random.randint(0,len(board)-1)
+def place_is_aviable(board, coordinates):
+    try:
+        if board[coordinates[0]][coordinates[1]] == 0:
+            return True
+    except:
+        return False
 
+#correct input true false
+def switch_player():
+        pass
+# return current player
+def mark_player_coordinates(board, coordinates): #greg
+        board[coordinates[0]][coordinates[1]] = 'X'
+        return board
 
-def random_pc_ship_col(board):
-    return random.randint(0, len(board[0])-1)
+def check_ship_end():
+        pass
+def switch_ship(current_ship):
+        current_ship += 1
+        pass
+def shoot(coordinates):
+        pass
+# return hit or miss
 
-ship_row_1 = random_pc_ship_row(board)
-ship_col_1 = random_pc_ship_col(board)
+def mark_shoot(coordinates, board)
+        if board[coordinates[0]][coordinates[1]] = 'X'
+                board[coordinates[0]][coordinates[1]] = 'H'
+        if board[coordinates[0]][coordinates[1]] != 'X'
+                board[coordinates[0]][coordinates[1]] = 'M'
+        # how to define Sunk status?       
+                return board
 
-ship_row_2 = random_pc_ship_row(board)
-ship_col_2 = random_pc_ship_col(board)
-
-ship_row_3 = random_pc_ship_row(board)
-ship_col_3 = random_pc_ship_col(board)
-
-ship_row_4 = random_pc_ship_row(board)
-ship_col_4 = random_pc_ship_col(board)
-
-ship_row_5 = random_pc_ship_row(board)
-ship_col_5 = random_pc_ship_col(board)
-
-ship_row_6 = random_pc_ship_row(board)
-ship_col_6 = random_pc_ship_col(board)
-
-ship_row_7 = random_pc_ship_row(board)
-ship_col_7 = random_pc_ship_col(board)
-
-ship_row_8 = random_pc_ship_row(board)
-ship_col_8 = random_pc_ship_col(board)
-
-ship_row_9 = random_pc_ship_row(board)
-ship_col_9 = random_pc_ship_col(board)
-
-ship_row_10 = random_pc_ship_row(board)
-ship_col_10 = random_pc_ship_col(board)
-
-
-def prinit_pc_ships(board, ship_col_1, ship_row_1, ship_col_2, ship_row_2):
-       if board[ship_col_1][ship_row_1] == '.' :
-              board[ship_col_1][ship_row_1] = '='
-       if board[ship_col_2][ship_row_2] == '.' :
-              board[ship_col_2][ship_row_2] = '='
-       if board[ship_col_3][ship_row_3] == '.' :
-              board[ship_col_3][ship_row_3] = '='
-       if board[ship_col_4][ship_row_4] == '.' :
-              board[ship_col_4][ship_row_4] = '='
-       if board[ship_col_5][ship_row_5] == '.' :
-              board[ship_col_5][ship_row_5] = '='
-       if board[ship_col_6][ship_row_6] == '.' :
-              board[ship_col_6][ship_row_6] = '='
-       if board[ship_col_7][ship_row_7] == '.' :
-              board[ship_col_7][ship_row_7] = '='
-       if board[ship_col_8][ship_row_8] == '.' :
-              board[ship_col_8][ship_row_8] = '='
-       if board[ship_col_9][ship_row_9] == '.' :
-              board[ship_col_2][ship_row_9] = '='
-       if board[ship_col_9][ship_row_9] == '.' :
-              board[ship_col_10][ship_row_10] = '='
-
-# def hint_12(ship_row_1, ship_col_1, ship_row_2, ship_col_2):
-#        print ("Ship 1 is hidden:")    
-#        print (board[ship_row_1][ship_col_1])
-#        print ("Ship 2 is hidden:")    
-#        print (board[ship_row_2][ship_col_2])
-
-# def prinit_pc_ships(board, ship_col_1, ship_row_1, ship_col_2, ship_row_2):
-#        if board[ship_col_1][ship_row_1] == '.' or board[ship_col_2][ship_row_2] == '.'  :
-#               board[][] = "="
-
-
-# prinit_pc_ships(board, ship_col_1, ship_row_1, ship_col_2, ship_row_2)
-
-# print("hint :Ship1 :", str(ship_row_1), str(ship_col_1))
-# print("hint :Ship2 :", str(ship_row_2), str(ship_col_2))
-
-# def mark_pc(board, current_player, row, col):
-#     board[int(row)][int(col)] = "s"
-#     return board
-
-print_board(board)
-
-
-hit_count = 0
-
-for turn in range(20):
-    guess_row = int(float(input("Guess Row:(0-9) ")))
-    guess_col = int(float(input("Guess Col:(0-9) ")))
-    os.system('cls||clear')
-    if hit_count == 1:
-            print("You sunk first battleship!") 
-    if hit_count == 20:
-            print("Sorry You have lost the game, take a look on ships positions.")       
-    if hit_count == 5:
-            print("You sunk five battleships! You win!")
-            print_board(board)
-            break
-    if turn == 3 :
-            print("_"*20)
-            print ("Hint :", ship_row_1, ship_col_1)
-            print("_"*20)
-    if turn == 6 :
-            print("_"*20)
-            print ("Hint :", ship_row_2, ship_col_2)
-            print("_"*20)
-    if turn == 9 :
-            print("_"*20)
-            print ("Hint :", ship_row_5, ship_col_5)
-            print ("Hint :", ship_row_6, ship_col_6)
-            print("_"*20)
-    if turn == 12 :
-            print("_"*20)
-            print ("Hint :", ship_row_7, ship_col_7)
-            print ("Hint :", ship_row_9, ship_col_9)
-            print("_"*20)
-    if turn == 18 :       
-            print("_"*20)
-            print ("Hint :", ship_row_3, ship_col_3)
-            print ("Hint :", ship_row_4, ship_col_4)
-            print ("Hint :", ship_row_8, ship_col_8)
-            print("_"*20)
-    if (guess_row == ship_row_1 and guess_col == ship_col_1) or (guess_row == ship_row_2 and guess_col == ship_col_2):
-        hit_count = hit_count + 1
-        board[guess_row][guess_col] = "H"
-        print ("Congratulations! ")
-    if (guess_row == ship_row_3 and guess_col == ship_col_3) or (guess_row == ship_row_4 and guess_col == ship_col_4) :
-        hit_count = hit_count + 1
-        board[guess_row][guess_col] = "H"
-        print ("Congratulations! ")
-    if (guess_row == ship_row_5 and guess_col == ship_col_5) or (guess_row == ship_row_6 and guess_col == ship_col_6) :
-        hit_count = hit_count + 1
-        board[guess_row][guess_col] = "H"
-        print ("Congratulations! ")
-    if (guess_row == ship_row_7 and guess_col == ship_col_7) or (guess_row == ship_row_8 and guess_col == ship_col_8) :
-        hit_count = hit_count + 1
-        board[guess_row][guess_col] = "H"
-        print ("Congratulations! ")
-    if (guess_row == ship_row_9 and guess_col == ship_col_9) or (guess_row == ship_row_10 and guess_col == ship_col_10):
-        hit_count = hit_count + 1
-        board[guess_row][guess_col] = "H"
-        print ("Congratulations! ")
-        if hit_count == 1:
-                print("You sunk first battleship!") 
-        if hit_count == 20:
-                print("Sorry You have lost the game, take a look on ships positions.")       
-        if hit_count == 5:
-                print("You sunk five battleships! You win!")
-                print_board(board)
-                break
-    else:
-            if (guess_row < 0 or guess_row > 10)  or (guess_col < 0 or guess_col > 10):
-                   print ("Oops, that's not even in the ocean.", player_1 )
-            elif(board[guess_row][guess_col] == "H"):
-                   board[guess_row][guess_col] = "S"
-                   print ("You sunk first battleship!", player_1)
-            else:
-                 print ("You missed my battleship!", player_1)
-                 board[guess_row][guess_col] = "M"
-            print("_"*20)
-            print( "You have killed", hit_count, "ships so far!", player_1)
-            print (turn + 1, "turn out of 20")
-            print("_"*20)
-    print_board(board)
+#return H or M or Sink
+def win_check():
+        pass
+# return True False if 3xH on player board
