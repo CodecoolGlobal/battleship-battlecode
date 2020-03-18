@@ -1,5 +1,8 @@
 def init_ships():       #greg
-        pass
+        ship1 = 1
+        ship2 = 2
+        return ship1, ship2
+
 #return two ships 1 unit 2unit
 
 
@@ -9,17 +12,16 @@ def init_board():       #piotrek
 
 
 def print_menu():       #greg
-        pass
-# initial menu
+        print('Placement phase: Player 1 turn. 1 part ship. Enter coordinates')
 
+# initial menu
 
 def round_menu():       #piotrek
         pass
 #round menu with player info
 
-
 def print_board():
-        pass
+        print(board)
 #print board
 def user_input():
         pass
