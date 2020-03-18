@@ -1,15 +1,23 @@
 def init_ships():       #greg
         pass
 #return two ships 1 unit 2unit
+
+
 def init_board():       #piotrek
         pass
 #init board 5x5 with boardlabel
+
+
 def print_menu():       #greg
         pass
 # initial menu
+
+
 def round_menu():       #piotrek
         pass
 #round menu with player info
+
+
 def print_board():
         pass
 #print board
