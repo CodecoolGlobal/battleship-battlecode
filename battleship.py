@@ -1,49 +1,45 @@
-<<<<<<< HEAD
-def init_ships():       #greg
-        ship1 = 1
-        ship2 = 2
-        return ship1, ship2
-
-#return two ships 1 unit 2unit
-=======
->>>>>>> Grzesiek
 
 def main():
     board = []
     init_board(board)
     print_board(board)
-    user_input_check()
+    print_menu()
+    is_running = True
+    ship = 1
+    previous_move = []
+    current_player = 1
+    while is_running:
+        coordinates = user_input()
+        if not user_input_check(coordinates) :
+            continue
+        translated_cooridinates = translate_letters_to_numbers(coordinates)
+        if not place_is_aviable(board, translated_cooridinates):
+            continue
+        if ship == 2:
+            if place_is_aviable_next_part(board, previous_move, translated_cooridinates):
+                continue
+        if ship == 3:
+            if not place_is_aviable_next_part(board, previous_move, translated_cooridinates):
+                continue
+        mark_player_coordinates(board, translated_cooridinates)
+        previous_move = translated_cooridinates
+        ship += 1
+        print_board(board)
+        if board.count('X') == 3:
+            switch_player(current_player)
 
-def init_board(board):       
-    for x in range(0,5):
+
+def init_board(board):
+    for x in range(0, 5):
         board.append(["0"]*5)
-   
-
-def init_ships():       #greg
-        ship1 = 1
-        ship2 = 2
-        return ship1, ship2
 
 
-def print_menu():       #greg
-        print('Placement phase: Player 1 turn. 1 part ship. Enter coordinates')
-<<<<<<< HEAD
-=======
+def print_menu():
+    print('Placement phase: Player 1 turn. 1 part ship. Enter coordinates')
 
-# initial menu
->>>>>>> Grzesiek
 
-# initial menu
-
-def round_menu():       #piotrek
-        pass
-#round menu with player info
-
-<<<<<<< HEAD
-def print_board():
-        print(board)
-#print board
-=======
+def round_menu():
+    pass
 
 
 def top_label_print():
@@ -65,77 +61,41 @@ def side_label_print(board):
 def print_board(board):
     top_label_print()
     side_label_print(board)
-    
-
-def user_input(): #greg
-
-        pass
-#return coordinates [][]
 
 
-class ValidationError(ValueError): 
-    pass
-
-def RangeValidator(text, num, r):
-    if num in r:
-        return num
-    raise ValidationError(text)
-
-def ValidCol(c): 
-    return RangeValidator("Columns must be in the range of 1 to 5 (inclusive)", c, range(1,6))
-
-def ValidRow(r): 
-    return RangeValidator("Rows must be in the range of A to E(exclusive)", r, range(chr(ord('a'), ord('e')))) # do korkety
-
-def user_input_check(): #piotrek
-    def GetInt(text, validator=None):
-        print()
-        while True:
-            n = input(text)
-            try:
-                n = int(n)
-
-                return n if validator is None else validator(n)
-
-            except ValueError as ve:
-                # prints ValidationErrors directly - else generic message:
-                if isinstance(ve, ValidationError):
-                    print(ve)
-                else:
-                    print("Invalid input: ", n)
-
-
-    column = GetInt("Pleased enter column: ", ValidCol)
-    row = GetInt("Pleased enter row: ", ValidRow)
-    print( row, column)
-
-
-def switch_player():
-        pass
-# return current player
-
-
-def mark_player_coordinates(): #greg
-        pass
-
-def check_ship_end():
-        pass
-
-
->>>>>>> Grzesiek
 def user_input():
-        pass
-#return coordinates [][]
+    coordinates = input("Please enter coordinates:\n")
+    return coordinates
+
+
+def place_is_aviable(board, coordinates):
+    if board[coordinates[0]][coordinates[1]] == '0':
+        return True
+    else:
+        print("Place already taken")
+        return False
+
+
+def place_is_aviable_next_part(board, previous_move, coordinates):
+    if board[coordinates[0]] == board[previous_move[0]]:
+        if coordinates[1] == previous_move[1] - 1 or coordinates[1] == previous_move[1] + 1:
+            return True
+    if board[coordinates[1]] == board[previous_move[1]]:
+        if coordinates[0] == previous_move[0] - 1 or coordinates[0] == previous_move[0] + 1:
+            return True
+
 
 def user_input_check(coordinates):
-        coordinates_list = list(coordinates)
+    coordinates_list = list(coordinates)
     if len(coordinates_list) != 2:
+        print("bla bla bla false input")
         return False
-    possible_coordinates = ['a','b','c','d','e','A','B','C','D','E','1','2','3','4','5','6']
+    possible_coordinates = ['a', 'b', 'c', 'd', 'e', 'A', 'B', 'C', 'D', 'E', '1', '2', '3', '4', '5']
     if coordinates_list[0] not in possible_coordinates or coordinates_list[1] not in possible_coordinates:
         print("Invalid Input try agian")
         return False
     return True
+
 
 def translate_letters_to_numbers(coordinates):
     coordinates_list = list(coordinates)
@@ -150,52 +110,46 @@ def translate_letters_to_numbers(coordinates):
             coordinates_list[0] = 3
         if coordinates_list[0] == 'E' or coordinates_list[0] == 'e':
             coordinates_list[0] = 4
-        if coordinates_list[0] == 'F' or coordinates_list[0] == 'f':
-            coordinates_list[0] = 5
         # coordinates_list[0] = int(coordinates_list[0]) + 1
-        coordinates_list[1] = int(coordinates_list[1]) -1
-        coordinates_list.reverse() 
+        coordinates_list[1] = int(coordinates_list[1]) - 1
+        # coordinates_list.reverse() bez reversa daje 4,0
     except:
         print('ERROR: Invalid input')
-    return coordinates_list    
+    return coordinates_list
 
-def place_is_aviable(board, coordinates):
-    try:
-        if board[coordinates[0]][coordinates[1]] == 0:
-            return True
-    except:
-        return False
 
-#correct input true false
-def switch_player():
-        pass
-# return current player
-def mark_player_coordinates(board, coordinates): #greg
-        board[coordinates[0]][coordinates[1]] = 'X'
-        return board
+def switch_player(current_player):
+    if current_player == 1:
+        current_player = 2
+    else:
+        current_player = 1
+
+
+def mark_player_coordinates(board, coordinates):
+    board[coordinates[0]][coordinates[1]] = 'X'
+    return board
+
 
 def check_ship_end():
-        pass
-def switch_ship(current_ship):
-        current_ship += 1
-        pass
+    pass
+
+
 def shoot(coordinates):
-        pass
-# return hit or miss
-    
+    pass
 
-def mark_shoot(coordinates, board)
-        if board[coordinates[0]][coordinates[1]] = 'X'
-                board[coordinates[0]][coordinates[1]] = 'H'
-        if board[coordinates[0]][coordinates[1]] != 'X'
-                board[coordinates[0]][coordinates[1]] = 'M'
-        # how to define Sunk status?       
-                return board
 
-#return H or M or Sink
+def mark_shoot(coordinates, board):
+    if board[coordinates[0]][coordinates[1]] == 'X':
+        board[coordinates[0]][coordinates[1]] = 'H'
+    if board[coordinates[0]][coordinates[1]] != 'X':
+        board[coordinates[0]][coordinates[1]] = 'M'
+# how to define Sunk status?      
+    return board
+
+
 def win_check():
-        pass
-# return True False if 3xH on player board
+    pass
+
 
 if __name__ == '__main__':
     main()
