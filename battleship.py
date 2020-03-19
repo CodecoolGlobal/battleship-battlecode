@@ -1,14 +1,19 @@
+
+def main():
+    board = []
+    init_board(board)
+    print_board(board)
+    user_input_check()
+
+def init_board(board):       
+    for x in range(0,5):
+        board.append(["0"]*5)
+   
+
 def init_ships():       #greg
         ship1 = 1
         ship2 = 2
         return ship1, ship2
-
-#return two ships 1 unit 2unit
-
-
-def init_board():       #piotrek
-        pass
-#init board 5x5 with boardlabel
 
 
 def print_menu():       #greg
@@ -16,14 +21,89 @@ def print_menu():       #greg
 
 # initial menu
 
+
 def round_menu():       #piotrek
         pass
 #round menu with player info
 
-def print_board(board):
-        print(board)
 
-#print board
+
+def top_label_print():
+    top_label = " "
+    counter_for_size_of_board = 1
+    while counter_for_size_of_board < 6:
+        top_label += (" " + str(counter_for_size_of_board))
+        counter_for_size_of_board += 1
+    print('{:^10}'.format(top_label))
+
+
+def side_label_print(board):
+    counter_for_chr_into_int = 65
+    for row in board:
+        print(chr(counter_for_chr_into_int), " ".join(row))
+        counter_for_chr_into_int += 1
+
+
+def print_board(board):
+    top_label_print()
+    side_label_print(board)
+    
+
+def user_input(): #greg
+
+        pass
+#return coordinates [][]
+
+
+class ValidationError(ValueError): 
+    pass
+
+def RangeValidator(text, num, r):
+    if num in r:
+        return num
+    raise ValidationError(text)
+
+def ValidCol(c): 
+    return RangeValidator("Columns must be in the range of 1 to 5 (inclusive)", c, range(1,6))
+
+def ValidRow(r): 
+    return RangeValidator("Rows must be in the range of A to E(exclusive)", r, range(chr(ord('a'), ord('e')))) # do korkety
+
+def user_input_check(): #piotrek
+    def GetInt(text, validator=None):
+        print()
+        while True:
+            n = input(text)
+            try:
+                n = int(n)
+
+                return n if validator is None else validator(n)
+
+            except ValueError as ve:
+                # prints ValidationErrors directly - else generic message:
+                if isinstance(ve, ValidationError):
+                    print(ve)
+                else:
+                    print("Invalid input: ", n)
+
+
+    column = GetInt("Pleased enter column: ", ValidCol)
+    row = GetInt("Pleased enter row: ", ValidRow)
+    print( row, column)
+
+
+def switch_player():
+        pass
+# return current player
+
+
+def mark_player_coordinates(): #greg
+        pass
+
+def check_ship_end():
+        pass
+
+
 def user_input():
         pass
 #return coordinates [][]
@@ -83,6 +163,7 @@ def switch_ship(current_ship):
 def shoot(coordinates):
         pass
 # return hit or miss
+    
 
 def mark_shoot(coordinates, board)
         if board[coordinates[0]][coordinates[1]] = 'X'
@@ -96,3 +177,6 @@ def mark_shoot(coordinates, board)
 def win_check():
         pass
 # return True False if 3xH on player board
+
+if __name__ == '__main__':
+    main()
