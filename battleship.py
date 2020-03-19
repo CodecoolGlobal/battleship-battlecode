@@ -2,7 +2,7 @@ def main():
     board = []
     init_board(board)
     print_board(board)
-
+    user_input_check()
 
 def init_ships():       #greg
         pass
@@ -52,9 +52,41 @@ def user_input(): #greg
 #return coordinates [][]
 
 
+class ValidationError(ValueError): 
+    pass
+
+def RangeValidator(text, num, r):
+    if num in r:
+        return num
+    raise ValidationError(text)
+
+def ValidCol(c): 
+    return RangeValidator("Columns must be in the range of 1 to 5 (inclusive)", c, range(1,6))
+
+def ValidRow(r): 
+    return RangeValidator("Rows must be in the range of A to E(exclusive)", r, range(chr(ord('a'), ord('e')))) # do korkety
+
 def user_input_check(): #piotrek
-        input_check = input("Podaj lokalizacje statku : \n")
-    
+    def GetInt(text, validator=None):
+        print()
+        while True:
+            n = input(text)
+            try:
+                n = int(n)
+
+                return n if validator is None else validator(n)
+
+            except ValueError as ve:
+                # prints ValidationErrors directly - else generic message:
+                if isinstance(ve, ValidationError):
+                    print(ve)
+                else:
+                    print("Invalid input: ", n)
+
+
+    column = GetInt("Pleased enter column: ", ValidCol)
+    row = GetInt("Pleased enter row: ", ValidRow)
+    print( row, column)
 
 
 def switch_player():
