@@ -20,6 +20,7 @@ def main():
                 continue
         if ship == 3:
             if not place_is_aviable_next_part(board, previous_move, translated_cooridinates):
+                print("Dude only bertical or horizontal ships!")
                 continue
         mark_player_coordinates(board, translated_cooridinates)
         previous_move = translated_cooridinates
@@ -35,7 +36,7 @@ def init_board(board):
 
 
 def print_menu():
-    print('Placement phase: Player 1 turn. 1 part ship. Enter coordinates')
+    print('Placement phase: Player 1 turn. 1 part ship.\nEnter coordinates\nSecond one will be two space ship.\nRemamber they can not be side by side!')
 
 
 def round_menu():
@@ -59,6 +60,9 @@ def side_label_print(board):
 
 
 def print_board(board):
+    print("_"*12)
+    print("NotSoBattleshipGame2")
+    print("_"*12)
     top_label_print()
     side_label_print(board)
 
@@ -79,9 +83,11 @@ def place_is_aviable(board, coordinates):
 def place_is_aviable_next_part(board, previous_move, coordinates):
     if board[coordinates[0]] == board[previous_move[0]]:
         if coordinates[1] == previous_move[1] - 1 or coordinates[1] == previous_move[1] + 1:
+            print("No no no - no side by side man!")
             return True
     if board[coordinates[1]] == board[previous_move[1]]:
         if coordinates[0] == previous_move[0] - 1 or coordinates[0] == previous_move[0] + 1:
+            print("No no no - no side by side man!")
             return True
 
 
@@ -153,3 +159,4 @@ def win_check():
 
 if __name__ == '__main__':
     main()
+
